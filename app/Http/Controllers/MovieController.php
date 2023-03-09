@@ -15,7 +15,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $user_id = User::where('id', Auth::user()->id)->first();
+        $user_id = User::where('id', Auth::user()->id)->first()->id;
         $movies = Movie::where('user_id', $user_id)->get();
         return response()->json([
             'user' => Auth::user(),
