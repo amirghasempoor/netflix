@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('genre');
             $table->date('publish_day');
-            $table->file('image');
+            $table->string('image');
             $table->foreignId('user_id')->constrained('users');
         });
     }

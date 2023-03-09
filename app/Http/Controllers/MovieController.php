@@ -15,7 +15,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::where('user_id', User::findById(Auth::user()->id))->all();
+        $user_id = User::where('id', Auth::user()->id)->first();
+        $movies = Movie::where('user_id', $user_id)->get();
         return response()->json([
             'user' => Auth::user(),
             'movies' => $movies,
@@ -48,9 +49,7 @@ class MovieController extends Controller
             'description' => $request->input('description'),
             'genre' => $request->input('genre'),
             'publish_day' => $request->input('publish_day'),
-            'image' => Storage::disk('public')
-                                ->put('images', $request->input('image')),
-
+            'image' => $request->file('image')->store('public/images'),
             'user_id' => Auth::user()->id
         ]);
 

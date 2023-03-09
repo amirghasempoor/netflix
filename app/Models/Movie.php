@@ -12,6 +12,15 @@ class Movie extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'genre',
+        'publish_day',
+        'image',
+        'user_id'
+    ];
+
     public function users() : BelongsTo
     {
         return $this->belongsTo(User::class);
